@@ -4,10 +4,19 @@ package Model;
  * @author Matthieu Le Boucher
  */
 public class Food {
+    /**
+     * The x coordinate of the food's position.
+     */
     public int x;
 
+    /**
+     * The y coordinate of the food's position.
+     */
     public int y;
 
+    /**
+     * Whether or not this food can be eaten by a pigeon.
+     */
     private boolean isFresh = true;
 
     public Food(int x, int y) {
