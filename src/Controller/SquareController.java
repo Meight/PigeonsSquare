@@ -11,7 +11,7 @@ public class SquareController {
 
     public void createSquare() {
         square = new Square(600, 400);
-        Ramier myBeautifulRamier = new Ramier();
+        Ramier myBeautifulRamier = new Ramier(30, 30);
     }
 
     public void updateSquare() {
