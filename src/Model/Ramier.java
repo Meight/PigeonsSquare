@@ -5,6 +5,10 @@ package Model;
  */
 public class Ramier extends Pigeon {
 
+    public Ramier(int x, int y) {
+        super(x, y);
+    }
+
     @Override
     public void run() {
         System.out.println("LOL RAMIER");

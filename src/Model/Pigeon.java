@@ -16,4 +16,8 @@ public abstract class Pigeon extends Thread {
 
     private double _vitesse;
 
+    public Pigeon(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
 }
