@@ -5,15 +5,28 @@ import java.util.List;
 
 /**
  * @author Matthieu Le Boucher
+ * A square is an abstraction of the viewport.
  */
 public class Square {
-    int width;
+    /**
+     * Width in pixels of the viewport.
+     */
+    private int width;
 
-    int height;
+    /**
+     * Height in pixels of the viewport.
+     */
+    private int height;
 
-    List<Pigeon> pigeons;
+    /**
+     * List of the pigeons currently living in the square.
+     */
+    private List<Pigeon> pigeons;
 
-    List<Food> foods;
+    /**
+     * List of all the food that was dropped in the square.
+     */
+    private List<Food> foods;
 
     public Square(int width, int height) {
         this.width = width;
