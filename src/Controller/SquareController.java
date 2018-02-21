@@ -12,6 +12,10 @@ public class SquareController {
     public void createSquare() {
         square = new Square(600, 400);
         Ramier myBeautifulRamier = new Ramier(30, 30);
+
+        square.addPigeon(myBeautifulRamier);
+
+        square.animatePigeons();
     }
 
     public void updateSquare() {

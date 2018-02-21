@@ -11,21 +11,30 @@ public class Square {
 
     int height;
 
-    List<Pigeon> pigeonsList;
+    List<Pigeon> pigeons;
 
-    List<Food> foodList;
+    List<Food> foods;
 
     public Square(int width, int height) {
         this.width = width;
         this.height = height;
-        pigeonsList = new ArrayList<>();
+        pigeons = new ArrayList<>();
     }
 
     public void addPigeon(Pigeon pigeon) {
-        this.pigeonsList.add(pigeon);
+        this.pigeons.add(pigeon);
     }
 
     public void addFood(Food food) {
-        this.foodList.add(food);
+        this.foods.add(food);
+    }
+
+    /**
+     * Starts the threads underlying behind the Pigeon abstraction.
+     */
+    public void animatePigeons() {
+        for(Pigeon pigeon : pigeons) {
+            pigeon.start();
+        }
     }
 }
