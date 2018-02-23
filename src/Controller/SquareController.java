@@ -13,14 +13,14 @@ public class SquareController {
     public void createSquare(int bisetAmount, int colombinAmount, int ramierAmount) {
         square = new Square(600, 400);
 
-        placeSpeciesRandomlu(square, Biset.class, bisetAmount);
-        placeSpeciesRandomlu(square, Colombin.class, colombinAmount);
-        placeSpeciesRandomlu(square, Ramier.class, ramierAmount);
+        placeSpeciesRandomly(square, Biset.class, bisetAmount);
+        placeSpeciesRandomly(square, Colombin.class, colombinAmount);
+        placeSpeciesRandomly(square, Ramier.class, ramierAmount);
 
         square.animatePigeons();
     }
 
-    private void placeSpeciesRandomlu(Square square, Class<? extends Pigeon> species, int speciesAmount) {
+    private void placeSpeciesRandomly(Square square, Class<? extends Pigeon> species, int speciesAmount) {
         Random random = new Random();
         for (int i = 0; i < speciesAmount; i++) {
             try {
