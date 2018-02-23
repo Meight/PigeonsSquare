@@ -50,4 +50,12 @@ public class Square {
             pigeon.start();
         }
     }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
 }
