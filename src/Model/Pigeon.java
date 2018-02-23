@@ -11,7 +11,6 @@ public abstract class Pigeon extends Thread {
     protected static final Color BISET_COLOR = Color.RED;
     protected static final Color RAMIER_COLOR = Color.GREEN;
 
-
     /**
      * The x coordinate of the pigeon on the screen.
      */
