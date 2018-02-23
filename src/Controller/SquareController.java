@@ -1,6 +1,9 @@
 package Controller;
 
 import Model.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 
 import java.util.Random;
 
@@ -9,7 +12,21 @@ import java.util.Random;
  * The intent of this class is to provide easy CRUD operations onto squares.
  */
 public class SquareController {
+    public Label bisetsLabel;
+    public Label colombinsLabel;
+    public Label ramiersLabel;
+
+    public TextField bisetsAmount;
+    public TextField colombinsAmount;
+    public TextField ramiersAmount;
+
+    public Button launchButton;
+
     private Square square;
+
+    public void createSquare() {
+
+    }
 
     /**
      * Create a new square and populates it with the specified amounts of each respective species.
@@ -17,7 +34,7 @@ public class SquareController {
      * @param colombinAmount    The amount of colombins to be populated within the square.
      * @param ramierAmount      The amount of ramiers to be populated within the square.
      */
-    public void createSquare(int bisetAmount, int colombinAmount, int ramierAmount) {
+    private void createSquare(int bisetAmount, int colombinAmount, int ramierAmount) {
         square = new Square(600, 400);
 
         placeSpeciesRandomly(square, Biset.class, bisetAmount);
