@@ -8,6 +8,7 @@ import javafx.scene.paint.Color;
  */
 public class Biset extends Pigeon{
     private static final Color COLOR = Color.GREEN;
+    private static final int SIZE = 3;
 
     public Biset(int x, int y) {
         super(x, y);
@@ -16,6 +17,11 @@ public class Biset extends Pigeon{
     @Override
     public Color getColor() {
         return COLOR;
+    }
+
+    @Override
+    public int getSize() {
+        return SIZE;
     }
 
     @Override

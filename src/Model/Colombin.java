@@ -8,6 +8,7 @@ import javafx.scene.paint.Color;
  */
 public class Colombin extends Pigeon {
     private static final Color COLOR = Color.RED;
+    private static final int SIZE = 5;
 
     public Colombin(int x, int y) {
         super(x, y);
@@ -16,6 +17,11 @@ public class Colombin extends Pigeon {
     @Override
     public Color getColor() {
         return COLOR;
+    }
+
+    @Override
+    public int getSize() {
+        return SIZE;
     }
 
     @Override

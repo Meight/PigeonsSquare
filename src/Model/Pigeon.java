@@ -27,5 +27,13 @@ public abstract class Pigeon extends Thread {
         this.y = y;
     }
 
+    /**
+     * @return The color of the individual, based on its species.
+     */
     public abstract Color getColor();
+
+    /**
+     * @return The size of the individual, based on its species.
+     */
+    public abstract int getSize();
 }
