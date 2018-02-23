@@ -25,12 +25,12 @@ public abstract class Pigeon extends Thread {
     /**
      * The square within which the pigeon is living.
      */
-    private Square square;
+    protected Square square;
 
     /**
      * The food being currently targeted by the pigeon.
      */
-    private Food targetFood;
+    protected Food targetFood;
 
     public Pigeon(int x, int y, double speed, Square square) {
         this.x = x;
@@ -41,6 +41,18 @@ public abstract class Pigeon extends Thread {
 
     protected void refreshTargetFood() {
         targetFood = square.getClosestFood(x, y);
+    }
+
+    /**
+     * The basic behavior of any pigeon, regardless of its species.
+     * @param dt The time elapsed since last loop.
+     */
+    protected void animate(double dt) {
+        if(targetFood == null)
+            refreshTargetFood();
+        else {
+
+        }
     }
 
     /**
