@@ -6,10 +6,17 @@ import java.util.Random;
 
 /**
  * @author : Matthieu Le Boucher
+ * The intent of this class is to provide easy CRUD operations onto squares.
  */
 public class SquareController {
     private Square square;
 
+    /**
+     * Create a new square and populates it with the specified amounts of each respective species.
+     * @param bisetAmount       The amount of bisets to be populated within the square.
+     * @param colombinAmount    The amount of colombins to be populated within the square.
+     * @param ramierAmount      The amount of ramiers to be populated within the square.
+     */
     public void createSquare(int bisetAmount, int colombinAmount, int ramierAmount) {
         square = new Square(600, 400);
 
@@ -20,6 +27,12 @@ public class SquareController {
         square.animatePigeons();
     }
 
+    /**
+     * Places a given amount of a specified pigeon species on the given square.
+     * @param square        The square where the new pigeons should be created.
+     * @param species       The species to be created.
+     * @param speciesAmount The amount of pigeons of that species to create.
+     */
     private void placeSpeciesRandomly(Square square, Class<? extends Pigeon> species, int speciesAmount) {
         Random random = new Random();
         for (int i = 0; i < speciesAmount; i++) {
