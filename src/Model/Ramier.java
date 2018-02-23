@@ -7,6 +7,7 @@ import javafx.scene.paint.Color;
  * @author Matthieu Le Boucher
  */
 public class Ramier extends Pigeon {
+    private static final Color COLOR = Color.BLUE;
 
     public Ramier(int x, int y) {
         super(x, y);
@@ -14,7 +15,7 @@ public class Ramier extends Pigeon {
 
     @Override
     public Color getColor() {
-        return RAMIER_COLOR;
+        return COLOR;
     }
 
     @Override

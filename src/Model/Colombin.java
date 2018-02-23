@@ -7,6 +7,7 @@ import javafx.scene.paint.Color;
  * @author Matthieu Le Boucher
  */
 public class Colombin extends Pigeon {
+    private static final Color COLOR = Color.RED;
 
     public Colombin(int x, int y) {
         super(x, y);
@@ -14,7 +15,7 @@ public class Colombin extends Pigeon {
 
     @Override
     public Color getColor() {
-        return COLOMBIN_COLOR;
+        return COLOR;
     }
 
     @Override
