@@ -34,12 +34,26 @@ public class Square {
         pigeons = new ArrayList<>();
     }
 
-    public void addPigeon(Pigeon pigeon) {
-        this.pigeons.add(pigeon);
-    }
+    /**
+     * Find the closest food to a given point (x, y) within the square.
+     * @param x The x coordinate of the point.
+     * @param y THe y coordinate of the point.
+     * @return The closest food to (x, y) if it exists, null otherwise.
+     */
+    public Food getClosestFood(int x, int y) {
+        double minimalDistance = Float.POSITIVE_INFINITY;
+        Food closestFood = null;
 
-    public void addFood(Food food) {
-        this.foods.add(food);
+        for(Food food : foods) {
+            double distance = Math.hypot(food.x - x, food.y - y);
+
+            if(distance < minimalDistance) {
+                minimalDistance = distance;
+                closestFood = food;
+            }
+        }
+
+        return closestFood;
     }
 
     /**
@@ -49,6 +63,14 @@ public class Square {
         for(Pigeon pigeon : pigeons) {
             pigeon.start();
         }
+    }
+
+    public void addPigeon(Pigeon pigeon) {
+        this.pigeons.add(pigeon);
+    }
+
+    public void addFood(Food food) {
+        this.foods.add(food);
     }
 
     public int getWidth() {
