@@ -10,8 +10,8 @@ public class Biset extends Pigeon{
     private static final Color COLOR = Color.GREEN;
     private static final int SIZE = 3;
 
-    public Biset(int x, int y) {
-        super(x, y);
+    public Biset(int x, int y, double speed, Square square) {
+        super(x, y, speed, square);
     }
 
     @Override

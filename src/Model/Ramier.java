@@ -10,8 +10,8 @@ public class Ramier extends Pigeon {
     private static final Color COLOR = Color.BLUE;
     private static final int SIZE = 2;
 
-    public Ramier(int x, int y) {
-        super(x, y);
+    public Ramier(int x, int y, double speed, Square square) {
+        super(x, y, speed, square);
     }
 
     @Override

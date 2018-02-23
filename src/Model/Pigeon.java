@@ -22,10 +22,19 @@ public abstract class Pigeon extends Thread {
      */
     private double speed;
 
-    public Pigeon(int x, int y) {
+    /**
+     * The square within which the pigeon is living.
+     */
+    private Square square;
+
+    public Pigeon(int x, int y, double speed, Square square) {
         this.x = x;
         this.y = y;
+        this.speed = speed;
+        this.square = square;
     }
+
+
 
     /**
      * @return The color of the individual, based on its species.

@@ -10,8 +10,8 @@ public class Colombin extends Pigeon {
     private static final Color COLOR = Color.RED;
     private static final int SIZE = 5;
 
-    public Colombin(int x, int y) {
-        super(x, y);
+    public Colombin(int x, int y, double speed, Square square) {
+        super(x, y, speed, square);
     }
 
     @Override
