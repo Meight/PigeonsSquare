@@ -27,6 +27,11 @@ public abstract class Pigeon extends Thread {
      */
     private Square square;
 
+    /**
+     * The food being currently targeted by the pigeon.
+     */
+    private Food targetFood;
+
     public Pigeon(int x, int y, double speed, Square square) {
         this.x = x;
         this.y = y;
@@ -34,7 +39,9 @@ public abstract class Pigeon extends Thread {
         this.square = square;
     }
 
-
+    protected void refreshTargetFood() {
+        targetFood = square.getClosestFood(x, y);
+    }
 
     /**
      * @return The color of the individual, based on its species.
