@@ -66,6 +66,10 @@ public abstract class Pigeon extends Thread implements Drawable {
             if(distanceToFood < getSize() && targetFood.isFresh()) {
                 // Target food can be reached by the pigeon. Eat it.
                 targetFood.eat();
+
+                // No matter whether or not the pigeon could eat the food first, it will have too look
+                // for other food next turn.
+                targetFood = null;
             }
         }
     }
