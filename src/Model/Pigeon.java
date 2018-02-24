@@ -63,7 +63,7 @@ public abstract class Pigeon extends Thread implements Drawable {
             // Refresh distance to target food.
             distanceToFood = Math.hypot(targetFood.x - x, targetFood.y - y);
 
-            if(distanceToFood < getSize()) {
+            if(distanceToFood < getSize() && targetFood.isFresh()) {
                 // Target food can be reached by the pigeon. Eat it.
                 targetFood.eat();
             }
