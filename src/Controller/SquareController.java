@@ -2,6 +2,7 @@ package Controller;
 
 import Model.*;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -74,7 +75,18 @@ public class SquareController {
 
     }
 
+    /**
+     * Renders all the drawable objects contained within the square.
+     */
     private void renderSquare() {
+        GraphicsContext graphicsContext = squareCanvas.getGraphicsContext2D();
 
+        for(Pigeon pigeon : square.getPigeons()) {
+            pigeon.draw(graphicsContext);
+        }
+
+        for(Food food : square.getFoods()) {
+            food.draw(graphicsContext);
+        }
     }
 }

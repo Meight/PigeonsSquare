@@ -80,4 +80,12 @@ public class Square {
     public int getHeight() {
         return height;
     }
+
+    public List<Pigeon> getPigeons() {
+        return pigeons;
+    }
+
+    public List<Food> getFoods() {
+        return foods;
+    }
 }
