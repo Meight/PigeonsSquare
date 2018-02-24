@@ -51,6 +51,14 @@ public abstract class Pigeon extends Thread {
         if(targetFood == null)
             refreshTargetFood();
         else {
+            // If the pigeon is targeting food, make it move in its direction.
+            double distanceToFood = Math.hypot(targetFood.x - x, targetFood.y - y);
+            double foodDirectionX = (targetFood.x - x) / distanceToFood; // Normalized.
+            double foodDirectionY = (targetFood.y - y) / distanceToFood; // Normalized.
+
+            x += foodDirectionX * speed * dt;
+            y += foodDirectionY * speed * dt;
+
 
         }
     }
