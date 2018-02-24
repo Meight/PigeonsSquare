@@ -19,27 +19,26 @@ public class Food implements Drawable {
     public int y;
 
     /**
-     * Whether or not this food can be eaten by a pigeon.
+     * The absolute time after which this food will turn bad.
      */
+    private double timeFresh;
+
     private boolean isFresh = true;
+
+    public Food(int x, int y, double timeFresh) {
+        this.x = x;
+        this.y = y;
+        this.timeFresh = timeFresh;
+    }
 
     public Food(int x, int y) {
         this.x = x;
         this.y = y;
     }
 
-    public Food(int x, int y, boolean isFresh) {
-        this.x = x;
-        this.y = y;
-        this.isFresh = isFresh;
-    }
-
-    public boolean isFresh() {
-        return isFresh;
-    }
-
-    public void setFresh(boolean fresh) {
-        isFresh = fresh;
+    public void rotten(double time) {
+        if(isFresh && time < timeFresh)
+            isFresh = false;
     }
 
     @Override

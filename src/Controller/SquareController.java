@@ -40,6 +40,9 @@ public class SquareController {
      */
     private void createSquare(int bisetAmount, int colombinAmount, int ramierAmount) {
         square = new Square(600, 400);
+        squareCanvas.setOnMouseClicked(event -> {
+            square.addFood(new Food(((int) event.getX()), ((int) event.getY())));
+        });
 
         placeSpeciesRandomly(square, Biset.class, bisetAmount);
         placeSpeciesRandomly(square, Colombin.class, colombinAmount);
@@ -72,7 +75,10 @@ public class SquareController {
     }
 
     public void updateSquare() {
-
+        for(Food food : square.getFoods()) {
+            // Update the fresh state of all existing foods.
+            food.rotten(System.currentTimeMillis() / 1_000);
+        }
     }
 
     /**
