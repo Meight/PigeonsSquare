@@ -45,14 +45,11 @@ public class Food implements Drawable {
         return isFresh;
     }
 
-    public synchronized boolean eat() {
+    public synchronized void eat() {
         if(square.getFoods().contains(this)) {
             // Notify the square that this food doesn't exist anymore.
             square.removeFood(this);
-            return true;
         }
-
-        return false;
     }
 
     @Override
