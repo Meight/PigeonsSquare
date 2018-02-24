@@ -7,7 +7,7 @@ import javafx.scene.paint.Color;
  * @author Matthieu Le Boucher
  */
 public class Colombin extends Pigeon {
-    private static final Color COLOR = Color.RED;
+    private static final Color COLOR = Color.PURPLE;
     private static final int SIZE = 5;
 
     public Colombin(int x, int y, double speed, Square square) {

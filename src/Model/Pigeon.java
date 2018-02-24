@@ -1,12 +1,13 @@
 package Model;
 
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
 /**
  * Created by lefou on 20/02/2018.
  * @author Matthieu Le Boucher
  */
-public abstract class Pigeon extends Thread {
+public abstract class Pigeon extends Thread implements Renderable {
     /**
      * The x coordinate of the pigeon on the screen.
      */
@@ -72,4 +73,11 @@ public abstract class Pigeon extends Thread {
      * @return The size of the individual, based on its species.
      */
     public abstract int getSize();
+
+    @Override
+    public void render(GraphicsContext graphicsContext) {
+        graphicsContext.setFill(getColor());
+        graphicsContext.setLineWidth(2);
+        graphicsContext.fillOval(x, y, getSize(), getSize());
+    }
 }

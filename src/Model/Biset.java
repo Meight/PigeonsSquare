@@ -7,7 +7,7 @@ import javafx.scene.paint.Color;
  * @author Matthieu Le Boucher
  */
 public class Biset extends Pigeon{
-    private static final Color COLOR = Color.GREEN;
+    private static final Color COLOR = Color.ORANGE;
     private static final int SIZE = 3;
 
     public Biset(int x, int y, double speed, Square square) {
