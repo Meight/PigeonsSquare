@@ -1,9 +1,13 @@
 package Model;
 
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
+
+
 /**
  * @author Matthieu Le Boucher
  */
-public class Food {
+public class Food implements Drawable {
     /**
      * The x coordinate of the food's position.
      */
@@ -36,5 +40,10 @@ public class Food {
 
     public void setFresh(boolean fresh) {
         isFresh = fresh;
+    }
+
+    @Override
+    public void draw(GraphicsContext graphicsContext) {
+        graphicsContext.setFill(isFresh ? Color.GREEN : Color.RED);
     }
 }
