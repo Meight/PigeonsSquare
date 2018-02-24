@@ -25,6 +25,11 @@ public class Food implements Drawable {
 
     private boolean isFresh = true;
 
+    /**
+     * This square is an observer. Needs to be noticed whenever the food has been eaten.
+     */
+    private Square square;
+
     public Food(int x, int y, double timeFresh) {
         this.x = x;
         this.y = y;
@@ -34,6 +39,11 @@ public class Food implements Drawable {
     public void rotten(double time) {
         if(isFresh && time < timeFresh)
             isFresh = false;
+    }
+
+    public void eat() {
+        // Notify the square that this food doesn't exist anymore.
+        square.removeFood(this);
     }
 
     @Override

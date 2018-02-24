@@ -88,4 +88,8 @@ public class Square {
     public List<Food> getFoods() {
         return foods;
     }
+
+    public void removeFood(Food food) {
+        foods.remove(food);
+    }
 }
