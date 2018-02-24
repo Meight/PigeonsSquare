@@ -14,6 +14,11 @@ import java.util.Random;
  * The intent of this class is to provide easy CRUD operations onto squares.
  */
 public class SquareController {
+    /**
+     * The maximum time during which food remains fresh, in seconds.
+     */
+    private static final int FOOD_MAX_FRESH_TIME = 5;
+
     public Label bisetsLabel;
     public Label colombinsLabel;
     public Label ramiersLabel;
@@ -28,6 +33,9 @@ public class SquareController {
 
     private Square square;
 
+    private Random random = new Random();
+
+
     public void createSquare() {
 
     }
@@ -41,7 +49,10 @@ public class SquareController {
     private void createSquare(int bisetAmount, int colombinAmount, int ramierAmount) {
         square = new Square(600, 400);
         squareCanvas.setOnMouseClicked(event -> {
-            square.addFood(new Food(((int) event.getX()), ((int) event.getY())));
+            // Instantiate new food at clicked position, with random decay time.
+            square.addFood(new Food(((int) event.getX()), ((int) event.getY()),
+                    random.nextInt(FOOD_MAX_FRESH_TIME) + ((int) System.currentTimeMillis() / 1_000)
+            ));
         });
 
         placeSpeciesRandomly(square, Biset.class, bisetAmount);
@@ -58,7 +69,6 @@ public class SquareController {
      * @param speciesAmount The amount of pigeons of that species to create.
      */
     private void placeSpeciesRandomly(Square square, Class<? extends Pigeon> species, int speciesAmount) {
-        Random random = new Random();
         for (int i = 0; i < speciesAmount; i++) {
             try {
                 Pigeon newPigeon = species.newInstance();

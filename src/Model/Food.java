@@ -31,11 +31,6 @@ public class Food implements Drawable {
         this.timeFresh = timeFresh;
     }
 
-    public Food(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
-
     public void rotten(double time) {
         if(isFresh && time < timeFresh)
             isFresh = false;
