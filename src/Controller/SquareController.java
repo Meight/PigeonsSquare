@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.*;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -21,6 +22,8 @@ public class SquareController {
     public TextField ramiersAmount;
 
     public Button launchButton;
+
+    public Canvas squareCanvas;
 
     private Square square;
 
@@ -71,7 +74,7 @@ public class SquareController {
 
     }
 
-    public void renderSquare() {
+    private void renderSquare() {
 
     }
 }
