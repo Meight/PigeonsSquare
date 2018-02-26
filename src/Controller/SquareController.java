@@ -1,6 +1,9 @@
 package Controller;
 
 import Model.*;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
@@ -115,5 +118,30 @@ public class SquareController {
      */
     public void setMainApplication(PigeonSquare mainApplication) {
         this.mainApplication = mainApplication;
+    }
+
+    @FXML
+    public void initialize() {
+        setNumericField(bisetsAmount);
+        setNumericField(colombinsAmount);
+        setNumericField(ramiersAmount);
+
+        launchButton.setOnMouseClicked(event -> {
+            this.createSquare(Integer.parseInt(bisetsAmount.getText()),
+                    Integer.parseInt(colombinsAmount.getText()),
+                    Integer.parseInt(ramiersAmount.getText()));
+        });
+    }
+
+    private void setNumericField(TextField textField) {
+        textField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    bisetsAmount.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
     }
 }
