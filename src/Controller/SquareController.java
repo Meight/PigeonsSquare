@@ -31,6 +31,8 @@ public class SquareController {
 
     public Canvas squareCanvas;
 
+    private PigeonSquare mainApplication;
+
     private Square square;
 
     private Random random = new Random();
@@ -104,5 +106,14 @@ public class SquareController {
         for(Food food : square.getFoods()) {
             food.draw(graphicsContext);
         }
+    }
+
+    /**
+     * Is called by the main application to give a reference back to itself.
+     *
+     * @param mainApplication
+     */
+    public void setMainApplication(PigeonSquare mainApplication) {
+        this.mainApplication = mainApplication;
     }
 }
