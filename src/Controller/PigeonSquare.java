@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.Square;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -15,6 +16,15 @@ import java.io.IOException;
 public class PigeonSquare extends Application {
     private Stage primaryStage;
     private BorderPane rootLayout;
+    private Square square;
+
+    public Square getSquare() {
+        return square;
+    }
+
+    public void setSquare(Square square) {
+        this.square = square;
+    }
 
     @Override
     public void start(Stage primaryStage) {
@@ -52,6 +62,26 @@ public class PigeonSquare extends Application {
             FXMLLoader loader = new FXMLLoader();
 
             loader.setLocation(PigeonSquare.class.getResource("/views/Create.fxml"));
+            AnchorPane gameCreator = (AnchorPane) loader.load();
+
+            // Give the controller access to the main app.
+            SquareController controller = loader.getController();
+            controller.setMainApplication(this);
+
+            // Set person overview into the center of root layout.
+            rootLayout.setCenter(gameCreator);
+        } catch (IOException e) {
+            //.printStackTrace();
+        }
+    }
+
+    public void showSquareScene() {
+
+        try {
+            // Load person overview.
+            FXMLLoader loader = new FXMLLoader();
+
+            loader.setLocation(PigeonSquare.class.getResource("/views/View.fxml"));
             AnchorPane gameCreator = (AnchorPane) loader.load();
 
             // Give the controller access to the main app.

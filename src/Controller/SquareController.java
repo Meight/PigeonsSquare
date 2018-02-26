@@ -53,16 +53,13 @@ public class SquareController {
      */
     private void createSquare(int bisetAmount, int colombinAmount, int ramierAmount) {
         square = new Square(600, 400);
-        squareCanvas.setOnMouseClicked(event -> {
-            // Instantiate new food at clicked position, with random decay time.
-            square.addFood(new Food(((int) event.getX()), ((int) event.getY()),
-                    random.nextInt(FOOD_MAX_FRESH_TIME) + ((int) System.currentTimeMillis() / 1_000)
-            ));
-        });
 
-        placeSpeciesRandomly(square, Biset.class, bisetAmount);
-        placeSpeciesRandomly(square, Colombin.class, colombinAmount);
-        placeSpeciesRandomly(square, Ramier.class, ramierAmount);
+        placeSpeciesRandomly(square, PigeonFactory.Species.BISET, bisetAmount);
+        placeSpeciesRandomly(square, PigeonFactory.Species.COLOMBIN, colombinAmount);
+        placeSpeciesRandomly(square, PigeonFactory.Species.RAMIER, ramierAmount);
+
+        mainApplication.setSquare(square);
+        mainApplication.showSquareScene();
 
         square.animatePigeons();
     }
@@ -73,19 +70,14 @@ public class SquareController {
      * @param species       The species to be created.
      * @param speciesAmount The amount of pigeons of that species to create.
      */
-    private void placeSpeciesRandomly(Square square, Class<? extends Pigeon> species, int speciesAmount) {
+    private void placeSpeciesRandomly(Square square, PigeonFactory.Species species, int speciesAmount) {
         for (int i = 0; i < speciesAmount; i++) {
-            try {
-                Pigeon newPigeon = species.newInstance();
-
-                // Positionate the pigeon randomly within the square limits.
-                newPigeon.x = random.nextInt(square.getWidth());
-                newPigeon.y = random.nextInt(square.getHeight());
-
-                square.addPigeon(newPigeon);
-            } catch (InstantiationException | IllegalAccessException e) {
-                e.printStackTrace();
-            }
+            // Positionate the pigeon randomly within the square limits, with a random speed.
+            square.addPigeon(PigeonFactory.createPigeon(species,
+                    random.nextInt(square.getWidth()),
+                    random.nextInt(square.getHeight()),
+                    random.nextDouble(),
+                    square));
         }
     }
 
@@ -126,11 +118,22 @@ public class SquareController {
         setNumericField(colombinsAmount);
         setNumericField(ramiersAmount);
 
-        launchButton.setOnMouseClicked(event -> {
-            this.createSquare(Integer.parseInt(bisetsAmount.getText()),
-                    Integer.parseInt(colombinsAmount.getText()),
-                    Integer.parseInt(ramiersAmount.getText()));
-        });
+        if(launchButton != null) {
+            launchButton.setOnMouseClicked(event -> {
+                this.createSquare(Integer.parseInt(bisetsAmount.getText()),
+                        Integer.parseInt(colombinsAmount.getText()),
+                        Integer.parseInt(ramiersAmount.getText()));
+            });
+        }
+
+        if(squareCanvas != null) {
+            squareCanvas.setOnMouseClicked(event -> {
+                // Instantiate new food at clicked position, with random decay time.
+                square.addFood(new Food(((int) event.getX()), ((int) event.getY()),
+                        random.nextInt(FOOD_MAX_FRESH_TIME) + ((int) System.currentTimeMillis() / 1_000)
+                ));
+            });
+        }
     }
 
     private void setNumericField(TextField textField) {

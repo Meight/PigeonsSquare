@@ -67,6 +67,7 @@ public class Square {
 
     public void addPigeon(Pigeon pigeon) {
         this.pigeons.add(pigeon);
+        System.out.println("Added pigeon of type: " + pigeon.getClass());
     }
 
     public void addFood(Food food) {
