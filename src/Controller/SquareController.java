@@ -38,12 +38,10 @@ public class SquareController {
 
     private Square square;
 
+    /**
+     * Random generator used to for pigeons position and speed.
+     */
     private Random random = new Random();
-
-
-    public void createSquare() {
-
-    }
 
     /**
      * Create a new square and populates it with the specified amounts of each respective species.
