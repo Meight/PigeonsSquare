@@ -22,6 +22,10 @@ public class SquareController {
      */
     private static final int FOOD_MAX_FRESH_TIME = 5;
 
+    private static final int TARGET_FPS = 60;
+
+    private static final long OPTIMAL_FRAME_TIME = 1_000_000_000 / TARGET_FPS;
+
     public Label bisetsLabel;
     public Label colombinsLabel;
     public Label ramiersLabel;
@@ -43,6 +47,12 @@ public class SquareController {
      */
     private Random random = new Random();
 
+    private boolean simulationRunning = false;
+
+    private double lastFpsTime = 0;
+
+    private int fps = 0;
+
     /**
      * Create a new square and populates it with the specified amounts of each respective species.
      * @param bisetAmount       The amount of bisets to be populated within the square.
@@ -56,10 +66,10 @@ public class SquareController {
         placeSpeciesRandomly(square, PigeonFactory.Species.COLOMBIN, colombinAmount);
         placeSpeciesRandomly(square, PigeonFactory.Species.RAMIER, ramierAmount);
 
+        System.out.println("Square " + square + " created.");
+
         mainApplication.setSquare(square);
         mainApplication.showSquareScene();
-
-        square.animatePigeons();
     }
 
     /**
@@ -79,17 +89,62 @@ public class SquareController {
         }
     }
 
-    public void updateSquare() {
-        for(Food food : square.getFoods()) {
+    public void launchSimulation() {
+        simulationRunning = true;
+        square.animatePigeons();
+
+        (new Thread(new Runnable(){
+            public void run(){
+                updateSquare(square);
+            }
+        })).start();
+    }
+
+    public void updateSquare(Square square) {
+        long lastLoopTime = System.nanoTime();
+
+        while(simulationRunning) {
+            long now = System.nanoTime();
+            long updateLength = now - lastLoopTime;
+            lastLoopTime = now;
+            double delta = updateLength / ((double) OPTIMAL_FRAME_TIME);
+
+            // Update the frame counter.
+            lastFpsTime += updateLength;
+            fps++;
+
+            if (lastFpsTime >= 1_000_000_000)
+            {
+                System.out.println("(FPS: "+fps+")");
+                lastFpsTime = 0;
+                fps = 0;
+            }
+
+            simulate(delta);
+            renderSquare(square);
+
+            try{
+                Thread.sleep( (lastLoopTime - System.nanoTime() + OPTIMAL_FRAME_TIME) / 1_000_000 );
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void simulate(double delta) {
+        for (Food food : square.getFoods()) {
             // Update the fresh state of all existing foods.
-            food.rotten(System.currentTimeMillis() / 1_000);
+            food.rotten(delta);
         }
     }
 
     /**
      * Renders all the drawable objects contained within the square.
      */
-    private void renderSquare() {
+    private void renderSquare(Square square) {
+        if(squareCanvas == null)
+            return;
+
         GraphicsContext graphicsContext = squareCanvas.getGraphicsContext2D();
 
         for(Pigeon pigeon : square.getPigeons()) {
@@ -112,9 +167,11 @@ public class SquareController {
 
     @FXML
     public void initialize() {
-        setNumericField(bisetsAmount);
-        setNumericField(colombinsAmount);
-        setNumericField(ramiersAmount);
+        if(bisetsAmount != null) {
+            setNumericField(bisetsAmount);
+            setNumericField(colombinsAmount);
+            setNumericField(ramiersAmount);
+        }
 
         if(launchButton != null) {
             launchButton.setOnMouseClicked(event -> {
@@ -144,5 +201,9 @@ public class SquareController {
                 }
             }
         });
+    }
+
+    public void setSquare(Square square) {
+        this.square = square;
     }
 }

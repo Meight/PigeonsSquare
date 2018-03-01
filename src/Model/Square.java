@@ -32,6 +32,7 @@ public class Square {
         this.width = width;
         this.height = height;
         pigeons = new ArrayList<>();
+        foods = new ArrayList<>();
     }
 
     /**
@@ -67,7 +68,6 @@ public class Square {
 
     public void addPigeon(Pigeon pigeon) {
         this.pigeons.add(pigeon);
-        System.out.println("Added pigeon of type: " + pigeon.getClass());
     }
 
     public void addFood(Food food) {

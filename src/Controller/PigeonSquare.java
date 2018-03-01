@@ -76,22 +76,23 @@ public class PigeonSquare extends Application {
     }
 
     public void showSquareScene() {
-
         try {
             // Load person overview.
             FXMLLoader loader = new FXMLLoader();
 
             loader.setLocation(PigeonSquare.class.getResource("/views/View.fxml"));
-            AnchorPane gameCreator = (AnchorPane) loader.load();
+            AnchorPane canvasView = (AnchorPane) loader.load();
 
             // Give the controller access to the main app.
             SquareController controller = loader.getController();
+            controller.setSquare(square);
             controller.setMainApplication(this);
 
-            // Set person overview into the center of root layout.
-            rootLayout.setCenter(gameCreator);
+            rootLayout.setCenter(canvasView);
+
+            controller.launchSimulation();
         } catch (IOException e) {
-            //.printStackTrace();
+            e.printStackTrace();
         }
     }
 

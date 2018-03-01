@@ -2,10 +2,8 @@
 
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.layout.AnchorPane?>
-
+<?import javafx.scene.shape.Circle?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.SquareController">
-   <children>
-      <Canvas fx:id="squareCanvas" height="400.0" width="600.0" />
-   </children>
+   <Canvas fx:id="squareCanvas" height="400.0" width="600.0" />
 </AnchorPane>
