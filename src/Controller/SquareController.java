@@ -1,6 +1,8 @@
 package Controller;
 
 import Model.*;
+import Model.Bird.Pigeon;
+import Model.Bird.PigeonFactory;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;

@@ -6,9 +6,9 @@ import Controller.SquareController;
  * @author Matthieu Le Boucher
  */
 public class Cracker {
-    int x;
+    public int x;
 
-    int y;
+    public int y;
 
     float radius;
 

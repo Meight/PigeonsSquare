@@ -1,4 +1,6 @@
-package Model;
+package Model.Bird;
+
+import Model.Square;
 
 /**
  * @author : Matthieu Le Boucher

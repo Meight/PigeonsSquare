@@ -1,5 +1,7 @@
 package Model;
 
+import Model.Bird.Pigeon;
+
 import java.util.ArrayList;
 import java.util.List;
 

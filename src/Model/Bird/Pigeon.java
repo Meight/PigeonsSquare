@@ -1,5 +1,9 @@
-package Model;
+package Model.Bird;
 
+import Model.Cracker;
+import Model.Drawable;
+import Model.Food;
+import Model.Square;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
@@ -55,7 +59,7 @@ public abstract class Pigeon extends Thread implements Drawable {
      * Triggered whenever some food is spawned on the square.
      * @param newFood The food that just got spawned on the square.
      */
-    void onFoodSpawn(Food newFood) {
+    public void onFoodSpawn(Food newFood) {
         if(targetFood == null) {
             targetFood = newFood;
         } else if(newFood.isFresh()) {
