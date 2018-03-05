@@ -41,7 +41,7 @@ public class Square {
      * @param y THe y coordinate of the point.
      * @return The closest food to (x, y) if it exists, null otherwise.
      */
-    public Food getClosestFood(int x, int y) {
+    public synchronized Food getClosestFood(int x, int y) {
         double minimalDistance = Float.POSITIVE_INFINITY;
         Food closestFood = null;
 
