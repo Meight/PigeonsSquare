@@ -206,7 +206,7 @@ public class SquareController {
     /**
      * Renders all the drawable objects contained within the square.
      */
-    private void renderSquare(Square square) {
+    private synchronized void renderSquare(Square square) {
         if(squareCanvas == null)
             return;
 
