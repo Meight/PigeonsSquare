@@ -117,7 +117,7 @@ public class SquareController {
         placeSpeciesRandomly(square, PigeonFactory.Species.COLOMBIN, colombinAmount);
         placeSpeciesRandomly(square, PigeonFactory.Species.RAMIER, ramierAmount);
 
-        square.addCracker(new Cracker(50, 50, 50, 3, square));
+        square.addCracker(new Cracker(50, 50, 50, 1000, 3, square));
 
         System.out.println("Square " + square + " created.");
 
@@ -181,7 +181,7 @@ public class SquareController {
                 fps = 0;
             }
 
-            simulate(delta);
+            simulate(updateLength);
             renderSquare(square);
 
             try{
@@ -197,10 +197,6 @@ public class SquareController {
      * @param delta The amount of time elapsed since last loop.
      */
     private synchronized void simulate(double delta) {
-        for (Cracker cracker : square.getCrackers()) {
-            cracker.tick(delta);
-        }
-
         for (Food food : square.getFoods()) {
             // Update the fresh state of all existing foods.
             food.rotten(delta);
