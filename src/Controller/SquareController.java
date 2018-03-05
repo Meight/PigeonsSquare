@@ -182,6 +182,10 @@ public class SquareController {
         }
     }
 
+    /**
+     * Simulates the model part of the application.
+     * @param delta The amount of time elapsed since last loop.
+     */
     private synchronized void simulate(double delta) {
         for (Cracker cracker : square.getCrackers()) {
             cracker.tick(delta);
@@ -221,6 +225,9 @@ public class SquareController {
         this.mainApplication = mainApplication;
     }
 
+    /**
+     * Hook for JavaFX that links all view handles to their graphical instance.
+     */
     @FXML
     public void initialize() {
         if(bisetsAmount != null) {
@@ -247,6 +254,10 @@ public class SquareController {
         }
     }
 
+    /**
+     * Modifies a text field to make it accept only numerical inputs.
+     * @param textField The text field to modify.
+     */
     private void setNumericField(TextField textField) {
         textField.textProperty().addListener(new ChangeListener<String>() {
             @Override
