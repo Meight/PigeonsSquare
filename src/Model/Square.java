@@ -74,6 +74,10 @@ public class Square {
 
     public void addFood(Food food) {
         this.foods.add(food);
+
+        for(Pigeon pigeon : pigeons) {
+            pigeon.onFoodSpawn(food);
+        }
     }
 
     public int getWidth() {

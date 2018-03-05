@@ -35,25 +35,36 @@ public abstract class Pigeon extends Thread implements Drawable {
      */
     protected Food targetFood;
 
-    protected boolean simulationRunning = false;
+    private boolean simulationRunning = false;
     private double lastFpsTime = 0;
 
     private int fps = 0;
 
-    public Pigeon(int x, int y, double speed, Square square) {
+    Pigeon(int x, int y, double speed, Square square) {
         this.x = x;
         this.y = y;
         this.speed = speed;
         this.square = square;
     }
 
-    protected void refreshTargetFood() {
+    private void refreshTargetFood() {
         targetFood = square.getClosestFood(x, y);
     }
 
-    public void simulate() {
+    /**
+     * Triggered whenever some food is spawned on the square.
+     * @param newFood The food that just got spawned on the square.
+     */
+    void onFoodSpawn(Food newFood) {
+        if(newFood.isFresh()) {
+            if(Math.hypot(newFood.x - x, newFood.y - y) < Math.hypot(targetFood.x - x, targetFood.y - y)) {
+                targetFood = newFood;
+            }
+        }
+    }
+
+    private void simulate() {
         long lastLoopTime = System.nanoTime();
-        System.out.println("Launching simulation for pigeon " + this);
 
         while (simulationRunning) {
             long now = System.nanoTime();
@@ -84,7 +95,7 @@ public abstract class Pigeon extends Thread implements Drawable {
      * The basic behavior of any pigeon, regardless of its species.
      * @param dt The time elapsed since last loop.
      */
-    protected void animate(double dt) {
+    private void animate(double dt) {
         if(targetFood == null || !targetFood.isFresh() || targetFood.hasBeenEaten()) {
             refreshTargetFood();
         } else {
