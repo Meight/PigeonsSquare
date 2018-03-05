@@ -13,17 +13,15 @@ public class Cracker {
 
     public int y;
 
-    float radius;
+    private float radius;
 
-    Timer timer;
-
-    double timeSinceExplosion = 0;
+    private Timer timer;
 
     private int remainingTicks;
 
     private boolean hasExploded = false;
 
-    Square square;
+    private Square square;
 
     public Cracker(int x, int y, float radius, int delay, int ticksBeforeExplosion, Square square) {
         this.x = x;
@@ -49,7 +47,7 @@ public class Cracker {
     }
 
     private void explode() {
-        remainingTicks = SquareController.CRACKER_THREAT_TIME;
+        remainingTicks = SquareController.CRACKER_THREAT_TIME + 1;
         hasExploded = true;
 
         timer = new Timer();
@@ -70,7 +68,7 @@ public class Cracker {
         square.removeCracker(this);
     }
 
-    private boolean hasExploded() {
+    public boolean hasExploded() {
         return hasExploded;
     }
 }
