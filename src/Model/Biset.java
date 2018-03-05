@@ -26,8 +26,7 @@ public class Biset extends Pigeon{
 
     @Override
     public void run() {
+        super.run();
         System.out.println("LOL BISET");
-        simulationRunning = true;
-        simulate();
     }
 }

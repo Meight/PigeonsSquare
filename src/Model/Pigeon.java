@@ -129,4 +129,10 @@ public abstract class Pigeon extends Thread implements Drawable {
         graphicsContext.setLineWidth(2);
         graphicsContext.fillOval(x, y, getSize(), getSize());
     }
+
+    @Override
+    public void run() {
+        simulationRunning = true;
+        simulate();
+    }
 }

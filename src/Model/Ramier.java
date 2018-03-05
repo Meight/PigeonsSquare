@@ -8,7 +8,7 @@ import javafx.scene.paint.Color;
  */
 public class Ramier extends Pigeon {
     private static final Color COLOR = Color.BLUE;
-    private static final int SIZE = 2;
+    private static final int SIZE = 7;
 
     public Ramier(int x, int y, double speed, Square square) {
         super(x, y, speed, square);
@@ -26,6 +26,7 @@ public class Ramier extends Pigeon {
 
     @Override
     public void run() {
+        super.run();
         System.out.println("LOL RAMIER");
     }
 }
