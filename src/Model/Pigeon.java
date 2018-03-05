@@ -56,7 +56,9 @@ public abstract class Pigeon extends Thread implements Drawable {
      * @param newFood The food that just got spawned on the square.
      */
     void onFoodSpawn(Food newFood) {
-        if(newFood.isFresh()) {
+        if(targetFood == null) {
+            targetFood = newFood;
+        } else if(newFood.isFresh()) {
             if(Math.hypot(newFood.x - x, newFood.y - y) < Math.hypot(targetFood.x - x, targetFood.y - y)) {
                 targetFood = newFood;
             }
@@ -103,9 +105,6 @@ public abstract class Pigeon extends Thread implements Drawable {
             double distanceToFood = Math.hypot(targetFood.x - x, targetFood.y - y);
             double foodDirectionX = (targetFood.x - x) / distanceToFood; // Normalized.
             double foodDirectionY = (targetFood.y - y) / distanceToFood; // Normalized.
-
-            System.out.println(this + " moving in direction (" + foodDirectionX + ", " + foodDirectionY + ")" +
-                    "x += " + (foodDirectionX * speed * dt) + ", y += " + (foodDirectionY * speed * dt));
 
             x += foodDirectionX * speed * dt;
             y += foodDirectionY * speed * dt;
