@@ -106,7 +106,7 @@ public abstract class Pigeon extends Thread implements Drawable {
         // Scan the square for crackers.
         for (Cracker cracker : square.getCrackers()) {
             if(cracker.hasExploded() && Math.hypot(cracker.x - x, cracker.y - y) < cracker.getRadius()) {
-                moveOppositeOf(cracker.x, cracker.y, dt);
+                moveAwayFrom(cracker.x, cracker.y, dt);
                 isThreatened = true;
             }
         }
@@ -138,7 +138,7 @@ public abstract class Pigeon extends Thread implements Drawable {
         moveTowards(targetX, targetY, dt, false);
     }
 
-    private void moveOppositeOf(int targetX, int targetY, double dt) {
+    private void moveAwayFrom(int targetX, int targetY, double dt) {
         moveTowards(targetX, targetY, dt, true);
     }
 
