@@ -92,7 +92,7 @@ public class Cracker implements Drawable {
             graphicsContext.setLineWidth(2);
             graphicsContext.setFill(Color.RED.deriveColor(0, 1, 1,
                     ((float) remainingTicks) / explosionTicks));
-            graphicsContext.fillOval(x, y, radius, radius);
+            graphicsContext.fillOval(x - radius, y - radius, radius * 2, radius * 2);
         }
     }
 
