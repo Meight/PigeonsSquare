@@ -117,7 +117,7 @@ public class SquareController {
         placeSpeciesRandomly(square, PigeonFactory.Species.COLOMBIN, colombinAmount);
         placeSpeciesRandomly(square, PigeonFactory.Species.RAMIER, ramierAmount);
 
-        square.addCracker(new Cracker(50, 50, 50, 1000, 3, square));
+        square.addCracker(new Cracker(300, 200, 100, 1000, 3, square));
 
         System.out.println("Square " + square + " created.");
 
@@ -213,16 +213,16 @@ public class SquareController {
         GraphicsContext graphicsContext = squareCanvas.getGraphicsContext2D();
         graphicsContext.clearRect(0, 0, square.getWidth(), square.getHeight());
 
+        for(Cracker cracker : square.getCrackers()) {
+            cracker.draw(graphicsContext);
+        }
+
         for(Pigeon pigeon : square.getPigeons()) {
             pigeon.draw(graphicsContext);
         }
 
         for(Food food : square.getFoods()) {
             food.draw(graphicsContext);
-        }
-
-        for(Cracker cracker : square.getCrackers()) {
-            cracker.draw(graphicsContext);
         }
     }
 
