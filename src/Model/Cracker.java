@@ -42,8 +42,6 @@ public class Cracker implements Drawable {
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                System.out.println("Tick, remaining ticks: " + remainingTicks);
-
                 if(remainingTicks == 1) {
                     timer.cancel();
                     explode();
@@ -68,7 +66,6 @@ public class Cracker implements Drawable {
                 }
 
                 remainingTicks--;
-                System.out.println("Remaining ticks: " + remainingTicks);
             }
         }, 0, 1_000 / fps);
     }
