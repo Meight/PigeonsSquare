@@ -140,6 +140,9 @@ public class SquareController {
         }
     }
 
+    /**
+     * Launches the simulation in a separate thread as well as all the separate threads embodied by pigeons.
+     */
     void launchSimulation() {
         simulationRunning = true;
         square.animatePigeons();
@@ -151,6 +154,11 @@ public class SquareController {
         })).start();
     }
 
+    /**
+     * Main pseudo-infinite loop that holds the logic of the simulation update,
+     * including model evolution and rendering.
+     * @param square The square to update
+     */
     private void updateSquare(Square square) {
         long lastLoopTime = System.nanoTime();
 
