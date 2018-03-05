@@ -22,6 +22,10 @@ public class SquareController {
      */
     private static final int FOOD_MAX_FRESH_TIME = 5;
 
+    private static final int MINIMAL_PIGEON_SPEED = 3;
+
+    private static final int MAXIMAL_PIGEON_SPEED = 5;
+
     public static final int TARGET_FPS = 60;
 
     public static final long OPTIMAL_FRAME_TIME = 1_000_000_000 / TARGET_FPS;
@@ -84,7 +88,7 @@ public class SquareController {
             square.addPigeon(PigeonFactory.createPigeon(species,
                     random.nextInt(square.getWidth()),
                     random.nextInt(square.getHeight()),
-                    8 * random.nextDouble() + 3,
+                    MAXIMAL_PIGEON_SPEED * random.nextDouble() + MINIMAL_PIGEON_SPEED,
                     square));
         }
     }
