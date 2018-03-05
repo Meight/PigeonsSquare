@@ -11,6 +11,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseButton;
 
 import java.util.Random;
 
@@ -116,10 +117,6 @@ public class SquareController {
         placeSpeciesRandomly(square, PigeonFactory.Species.BISET, bisetAmount);
         placeSpeciesRandomly(square, PigeonFactory.Species.COLOMBIN, colombinAmount);
         placeSpeciesRandomly(square, PigeonFactory.Species.RAMIER, ramierAmount);
-
-        square.addCracker(new Cracker(300, 200, 100, 1000, 3, square));
-
-        System.out.println("Square " + square + " created.");
 
         mainApplication.setSquare(square);
         mainApplication.showSquareScene();
@@ -256,10 +253,15 @@ public class SquareController {
 
         if(squareCanvas != null) {
             squareCanvas.setOnMouseClicked(event -> {
-                // Instantiate new food at clicked position, with random decay time.
-                square.addFood(new Food(((int) event.getX()), ((int) event.getY()),
-                        random.nextInt(FOOD_MAX_FRESH_TIME) + ((int) System.currentTimeMillis() / 1_000
-                ), square));
+                if(event.getButton() == MouseButton.PRIMARY) {
+                    // Instantiate new food at clicked position, with random decay time.
+                    square.addFood(new Food(((int) event.getX()), ((int) event.getY()),
+                            random.nextInt(FOOD_MAX_FRESH_TIME) + ((int) System.currentTimeMillis() / 1_000
+                            ), square));
+                } else {
+                    square.addCracker(new Cracker(((int) event.getX()), ((int) event.getY()),
+                            random.nextInt(50) + 50, 0, random.nextInt(3) + 1, square));
+                }
             });
         }
     }
