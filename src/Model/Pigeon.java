@@ -73,7 +73,7 @@ public abstract class Pigeon extends Thread implements Drawable {
             animate(delta);
 
             try {
-                Thread.sleep((lastLoopTime - System.nanoTime() + OPTIMAL_FRAME_TIME) / 1_000_000);
+                Thread.sleep(Math.max((lastLoopTime - System.nanoTime() + OPTIMAL_FRAME_TIME) / 1_000_000, 1));
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

@@ -26,7 +26,7 @@ public class SquareController {
 
     private static final int MAXIMAL_PIGEON_SPEED = 5;
 
-    public static final int TARGET_FPS = 60;
+    public static final int TARGET_FPS = 30;
 
     public static final long OPTIMAL_FRAME_TIME = 1_000_000_000 / TARGET_FPS;
 
