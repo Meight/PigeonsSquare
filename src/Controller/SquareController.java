@@ -22,9 +22,9 @@ public class SquareController {
      */
     private static final int FOOD_MAX_FRESH_TIME = 5;
 
-    private static final int TARGET_FPS = 60;
+    public static final int TARGET_FPS = 60;
 
-    private static final long OPTIMAL_FRAME_TIME = 1_000_000_000 / TARGET_FPS;
+    public static final long OPTIMAL_FRAME_TIME = 1_000_000_000 / TARGET_FPS;
 
     public Label bisetsLabel;
     public Label colombinsLabel;
@@ -84,7 +84,7 @@ public class SquareController {
             square.addPigeon(PigeonFactory.createPigeon(species,
                     random.nextInt(square.getWidth()),
                     random.nextInt(square.getHeight()),
-                    random.nextDouble(),
+                    8 * random.nextDouble() + 3,
                     square));
         }
     }
@@ -131,7 +131,7 @@ public class SquareController {
         }
     }
 
-    private void simulate(double delta) {
+    private synchronized void simulate(double delta) {
         for (Food food : square.getFoods()) {
             // Update the fresh state of all existing foods.
             food.rotten(delta);
@@ -146,6 +146,7 @@ public class SquareController {
             return;
 
         GraphicsContext graphicsContext = squareCanvas.getGraphicsContext2D();
+        graphicsContext.clearRect(0, 0, square.getWidth(), square.getHeight());
 
         for(Pigeon pigeon : square.getPigeons()) {
             pigeon.draw(graphicsContext);
@@ -185,8 +186,8 @@ public class SquareController {
             squareCanvas.setOnMouseClicked(event -> {
                 // Instantiate new food at clicked position, with random decay time.
                 square.addFood(new Food(((int) event.getX()), ((int) event.getY()),
-                        random.nextInt(FOOD_MAX_FRESH_TIME) + ((int) System.currentTimeMillis() / 1_000)
-                ));
+                        random.nextInt(FOOD_MAX_FRESH_TIME) + ((int) System.currentTimeMillis() / 1_000
+                ), square));
             });
         }
     }

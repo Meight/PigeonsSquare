@@ -25,15 +25,18 @@ public class Food implements Drawable {
 
     private boolean isFresh = true;
 
+    private boolean hasBeenEaten = false;
+
     /**
      * This square is an observer. Needs to be noticed whenever the food has been eaten.
      */
     private Square square;
 
-    public Food(int x, int y, double timeFresh) {
+    public Food(int x, int y, double timeFresh, Square square) {
         this.x = x;
         this.y = y;
         this.timeFresh = timeFresh;
+        this.square = square;
     }
 
     public void rotten(double time) {
@@ -45,16 +48,21 @@ public class Food implements Drawable {
         return isFresh;
     }
 
+    public boolean hasBeenEaten() {
+        return hasBeenEaten;
+    }
+
     public synchronized void eat() {
         if(square.getFoods().contains(this)) {
             // Notify the square that this food doesn't exist anymore.
             square.removeFood(this);
+            hasBeenEaten = true;
         }
     }
 
     @Override
     public void draw(GraphicsContext graphicsContext) {
         graphicsContext.setFill(isFresh ? Color.GREEN : Color.RED);
-        graphicsContext.strokeOval(x, y, 2, 2);
+        graphicsContext.strokeOval(x, y, 7, 7);
     }
 }

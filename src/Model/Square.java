@@ -46,11 +46,13 @@ public class Square {
         Food closestFood = null;
 
         for(Food food : foods) {
-            double distance = Math.hypot(food.x - x, food.y - y);
+            if(food.isFresh() && !food.hasBeenEaten()) {
+                double distance = Math.hypot(food.x - x, food.y - y);
 
-            if(distance < minimalDistance) {
-                minimalDistance = distance;
-                closestFood = food;
+                if (distance < minimalDistance) {
+                    minimalDistance = distance;
+                    closestFood = food;
+                }
             }
         }
 

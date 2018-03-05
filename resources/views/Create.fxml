@@ -23,7 +23,7 @@
                     </font>
                 </Label>
                 <TextField fx:id="bisetsAmount" layoutX="179.0" layoutY="15.0" prefHeight="25.0" prefWidth="75.0"
-                           text="10"/>
+                           text="2"/>
                 <Label fx:id="colombinsLabel" layoutY="55.0" prefHeight="25.0" prefWidth="159.0"
                        text="Nombre de colombins">
                     <font>
@@ -31,7 +31,7 @@
                     </font>
                 </Label>
                 <TextField fx:id="colombinsAmount" layoutX="179.0" layoutY="55.0" prefHeight="25.0" prefWidth="75.0"
-                           text="10"/>
+                           text="1"/>
                 <Label fx:id="ramiersLabel" layoutY="95.0" prefHeight="25.0" prefWidth="159.0"
                        text="Nombre de ramiers">
                     <font>
@@ -39,7 +39,7 @@
                     </font>
                 </Label>
                 <TextField fx:id="ramiersAmount" layoutX="179.0" layoutY="95.0" prefHeight="25.0" prefWidth="75.0"
-                           text="10"/>
+                           text="1"/>
                 <Button fx:id="launchButton" layoutX="112.0" layoutY="146.0" mnemonicParsing="false" text="Lancer">
                     <font>
                         <Font size="15.0"/>

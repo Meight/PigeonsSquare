@@ -8,7 +8,7 @@ import javafx.scene.paint.Color;
  */
 public class Biset extends Pigeon{
     private static final Color COLOR = Color.ORANGE;
-    private static final int SIZE = 3;
+    private static final int SIZE = 10;
 
     public Biset(int x, int y, double speed, Square square) {
         super(x, y, speed, square);
@@ -27,5 +27,7 @@ public class Biset extends Pigeon{
     @Override
     public void run() {
         System.out.println("LOL BISET");
+        simulationRunning = true;
+        simulate();
     }
 }
