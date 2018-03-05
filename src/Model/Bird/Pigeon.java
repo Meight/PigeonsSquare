@@ -102,13 +102,16 @@ public abstract class Pigeon extends Thread implements Drawable {
      * @param dt The time elapsed since last loop.
      */
     private void animate(double dt) {
+        boolean isThreatened = false;
         // Scan the square for crackers.
-        if(!square.getCrackers().isEmpty()) {
-            for (Cracker cracker : square.getCrackers()) {
-                if(cracker.hasExploded() && Math.hypot(cracker.x - x, cracker.y - y) < cracker.getRadius())
-                    moveOppositeOf(cracker.x, cracker.y, dt);
+        for (Cracker cracker : square.getCrackers()) {
+            if(cracker.hasExploded() && Math.hypot(cracker.x - x, cracker.y - y) < cracker.getRadius()) {
+                moveOppositeOf(cracker.x, cracker.y, dt);
+                isThreatened = true;
             }
-        } else {
+        }
+
+        if(!isThreatened) {
             // If there's no cracker, look for food.
             if (targetFood == null || !targetFood.isFresh() || targetFood.hasBeenEaten()) {
                 refreshTargetFood();
