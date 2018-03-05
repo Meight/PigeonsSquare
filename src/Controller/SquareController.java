@@ -14,7 +14,8 @@ import java.util.Random;
 
 /**
  * @author : Matthieu Le Boucher
- * The intent of this class is to provide easy CRUD operations onto squares.
+ * The intent of this class is to provide control over the square model and render the simulation in the graphical
+ * application.
  */
 public class SquareController {
     /**
@@ -22,28 +23,63 @@ public class SquareController {
      */
     private static final int FOOD_MAX_FRESH_TIME = 5;
 
+    /**
+     * The amount of time, in seconds, that a cracker is considered an active threat.
+     */
+    public static final int CRACKER_THREAT_TIME = 3;
+
+    /**
+     * The upper bound of the speed interval of any pigeon in the square.
+     */
     private static final int MINIMAL_PIGEON_SPEED = 3;
 
+    /**
+     * The upper bound of the speed interval of any pigeon in the square.
+     */
     private static final int MAXIMAL_PIGEON_SPEED = 5;
 
-    public static final int TARGET_FPS = 30;
+    /**
+     * The intended amount of frames per seconds for both simulation and rendering.
+     */
+    private static final int TARGET_FPS = 30;
 
+    /**
+     * Stores the optimal time of a frame in nanoseconds.
+     */
     public static final long OPTIMAL_FRAME_TIME = 1_000_000_000 / TARGET_FPS;
 
+    /**
+     * View labels handles.
+     */
     public Label bisetsLabel;
     public Label colombinsLabel;
     public Label ramiersLabel;
 
+    /**
+     * View text fields handles.
+     */
     public TextField bisetsAmount;
     public TextField colombinsAmount;
     public TextField ramiersAmount;
 
+    /**
+     * View buttons handles.
+     */
     public Button launchButton;
 
+    /**
+     * Graphical canvas handle.
+     */
     public Canvas squareCanvas;
 
+    /**
+     * Handle to the main graphical application.
+     */
     private PigeonSquare mainApplication;
 
+    /**
+     * The square model used for the simulation.
+     */
     private Square square;
 
     /**
@@ -51,10 +87,19 @@ public class SquareController {
      */
     private Random random = new Random();
 
+    /**
+     * Whether or not the simulation is currently running.
+     */
     private boolean simulationRunning = false;
 
+    /**
+     * The last system time at which the PFS counter was triggered.
+     */
     private double lastFpsTime = 0;
 
+    /**
+     * The current amount of FPS computed during the last second.
+     */
     private int fps = 0;
 
     /**
@@ -69,6 +114,8 @@ public class SquareController {
         placeSpeciesRandomly(square, PigeonFactory.Species.BISET, bisetAmount);
         placeSpeciesRandomly(square, PigeonFactory.Species.COLOMBIN, colombinAmount);
         placeSpeciesRandomly(square, PigeonFactory.Species.RAMIER, ramierAmount);
+
+        square.addCracker(new Cracker(50, 50, 50, 3, square));
 
         System.out.println("Square " + square + " created.");
 
@@ -93,7 +140,7 @@ public class SquareController {
         }
     }
 
-    public void launchSimulation() {
+    void launchSimulation() {
         simulationRunning = true;
         square.animatePigeons();
 
@@ -104,7 +151,7 @@ public class SquareController {
         })).start();
     }
 
-    public void updateSquare(Square square) {
+    private void updateSquare(Square square) {
         long lastLoopTime = System.nanoTime();
 
         while(simulationRunning) {
@@ -136,6 +183,10 @@ public class SquareController {
     }
 
     private synchronized void simulate(double delta) {
+        for (Cracker cracker : square.getCrackers()) {
+            cracker.tick(delta);
+        }
+
         for (Food food : square.getFoods()) {
             // Update the fresh state of all existing foods.
             food.rotten(delta);

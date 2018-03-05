@@ -90,6 +90,10 @@ public class Square {
         this.crackers.add(cracker);
     }
 
+    public synchronized void removeCracker(Cracker cracker) {
+        this.crackers.remove(cracker);
+    }
+
     public int getWidth() {
         return width;
     }
@@ -104,6 +108,10 @@ public class Square {
 
     public List<Food> getFoods() {
         return foods;
+    }
+
+    public synchronized List<Cracker> getCrackers() {
+        return crackers;
     }
 
     public void removeFood(Food food) {

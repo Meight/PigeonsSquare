@@ -98,29 +98,50 @@ public abstract class Pigeon extends Thread implements Drawable {
      * @param dt The time elapsed since last loop.
      */
     private void animate(double dt) {
-        if(targetFood == null || !targetFood.isFresh() || targetFood.hasBeenEaten()) {
-            refreshTargetFood();
+        // Scan the square for crackers.
+        if(!square.getCrackers().isEmpty()) {
+            for (Cracker cracker : square.getCrackers()) {
+                moveOppositeOf(cracker.x, cracker.y, dt);
+            }
         } else {
-            // If the pigeon is targeting food, make it move in its direction.
-            double distanceToFood = Math.hypot(targetFood.x - x, targetFood.y - y);
-            double foodDirectionX = (targetFood.x - x) / distanceToFood; // Normalized.
-            double foodDirectionY = (targetFood.y - y) / distanceToFood; // Normalized.
+            // If there's no cracker, look for food.
+            if (targetFood == null || !targetFood.isFresh() || targetFood.hasBeenEaten()) {
+                refreshTargetFood();
+            } else {
+                // If the pigeon is targeting food, make it move in its direction.
+                moveTowards(targetFood.x, targetFood.y, dt);
 
-            x += foodDirectionX * speed * dt;
-            y += foodDirectionY * speed * dt;
+                // Refresh distance to target food.
+                double distanceToFood = Math.hypot(targetFood.x - x, targetFood.y - y);
 
-            // Refresh distance to target food.
-            distanceToFood = Math.hypot(targetFood.x - x, targetFood.y - y);
+                if (distanceToFood < getSize() && targetFood.isFresh()) {
+                    // Target food can be reached by the pigeon. Eat it.
+                    targetFood.eat();
 
-            if(distanceToFood < getSize() && targetFood.isFresh()) {
-                // Target food can be reached by the pigeon. Eat it.
-                targetFood.eat();
-
-                // No matter whether or not the pigeon could eat the food first, it will have too look
-                // for other food next turn.
-                targetFood = null;
+                    // No matter whether or not the pigeon could eat the food first, it will have too look
+                    // for other food next turn.
+                    targetFood = null;
+                }
             }
         }
+    }
+
+    private void moveTowards(int targetX, int targetY, double dt) {
+        moveTowards(targetX, targetY, dt, false);
+    }
+
+    private void moveOppositeOf(int targetX, int targetY, double dt) {
+        moveTowards(targetX, targetY, dt, true);
+    }
+
+    private void moveTowards(int targetX, int targetY, double dt, boolean oppositeDirection) {
+        int wayFactor = oppositeDirection ? -1 : 1;
+        double distanceToTarget = Math.hypot(targetX - x, targetY - y);
+        double targetDirectionX = wayFactor * (targetX - x) / distanceToTarget; // Normalized.
+        double targetDirectionY = wayFactor * (targetY - y) / distanceToTarget; // Normalized.
+
+        x += targetDirectionX * speed * dt;
+        y += targetDirectionY * speed * dt;
     }
 
     /**
