@@ -142,8 +142,15 @@ public abstract class Pigeon extends Thread implements Drawable {
         moveTowards(targetX, targetY, dt, true);
     }
 
-    private void moveTowards(int targetX, int targetY, double dt, boolean oppositeDirection) {
-        int wayFactor = oppositeDirection ? -1 : 1;
+    /**
+     * Moves towards a target position (x, y).
+     * @param targetX           Target X coordinate.
+     * @param targetY           Target Y coordinate.
+     * @param dt                The amount of time elapsed since last loop.
+     * @param oppositeWay The way along the direction in which to move.
+     */
+    private void moveTowards(int targetX, int targetY, double dt, boolean oppositeWay) {
+        int wayFactor = oppositeWay ? -1 : 1;
         double distanceToTarget = Math.hypot(targetX - x, targetY - y);
         double targetDirectionX = wayFactor * (targetX - x) / distanceToTarget; // Normalized.
         double targetDirectionY = wayFactor * (targetY - y) / distanceToTarget; // Normalized.
