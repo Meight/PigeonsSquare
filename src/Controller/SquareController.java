@@ -28,7 +28,7 @@ public class SquareController {
     /**
      * The amount of time, in seconds, that a cracker is considered an active threat.
      */
-    public static final int CRACKER_THREAT_TIME = 1;
+    public static final int CRACKER_THREAT_TIME = 3;
 
     /**
      * The upper bound of the speed interval of any pigeon in the square.
@@ -219,6 +219,10 @@ public class SquareController {
 
         for(Food food : square.getFoods()) {
             food.draw(graphicsContext);
+        }
+
+        for(Cracker cracker : square.getCrackers()) {
+            cracker.draw(graphicsContext);
         }
     }
 

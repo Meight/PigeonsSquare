@@ -1,6 +1,8 @@
 package Model;
 
 import Controller.SquareController;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -8,7 +10,7 @@ import java.util.TimerTask;
 /**
  * @author Matthieu Le Boucher
  */
-public class Cracker {
+public class Cracker implements Drawable {
     public int x;
 
     public int y;
@@ -19,9 +21,15 @@ public class Cracker {
 
     private int remainingTicks;
 
+    private float explosionPercentage;
+
     private boolean hasExploded = false;
 
     private Square square;
+
+    private int fps = 20;
+
+    private int explosionTicks = SquareController.CRACKER_THREAT_TIME * fps;
 
     public Cracker(int x, int y, float radius, int delay, int ticksBeforeExplosion, Square square) {
         this.x = x;
@@ -36,7 +44,7 @@ public class Cracker {
             public void run() {
                 System.out.println("Tick, remaining ticks: " + remainingTicks);
 
-                if(remainingTicks == 0) {
+                if(remainingTicks == 1) {
                     timer.cancel();
                     explode();
                 }
@@ -47,7 +55,7 @@ public class Cracker {
     }
 
     private void explode() {
-        remainingTicks = SquareController.CRACKER_THREAT_TIME + 1;
+        remainingTicks = explosionTicks;
         hasExploded = true;
 
         timer = new Timer();
@@ -60,8 +68,9 @@ public class Cracker {
                 }
 
                 remainingTicks--;
+                System.out.println("Remaining ticks: " + remainingTicks);
             }
-        }, 0, 1_000);
+        }, 0, 1_000 / fps);
     }
 
     private void removeSelf() {
@@ -70,5 +79,24 @@ public class Cracker {
 
     public boolean hasExploded() {
         return hasExploded;
+    }
+
+    @Override
+    public void draw(GraphicsContext graphicsContext) {
+        if(!hasExploded) {
+            graphicsContext.setFill(Color.RED);
+            graphicsContext.setLineWidth(2);
+            graphicsContext.fillRect(x - 10, y - 10, 20, 20);
+            graphicsContext.fillText(String.valueOf(remainingTicks), x - 5, y + 25);
+        } else {
+            graphicsContext.setLineWidth(2);
+            graphicsContext.setFill(Color.RED.deriveColor(0, 1, 1,
+                    ((float) remainingTicks) / explosionTicks));
+            graphicsContext.fillOval(x, y, radius, radius);
+        }
+    }
+
+    public float getRadius() {
+        return radius;
     }
 }

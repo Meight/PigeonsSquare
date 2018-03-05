@@ -105,7 +105,7 @@ public abstract class Pigeon extends Thread implements Drawable {
         // Scan the square for crackers.
         if(!square.getCrackers().isEmpty()) {
             for (Cracker cracker : square.getCrackers()) {
-                if(cracker.hasExploded())
+                if(cracker.hasExploded() && Math.hypot(cracker.x - x, cracker.y - y) < cracker.getRadius())
                     moveOppositeOf(cracker.x, cracker.y, dt);
             }
         } else {
