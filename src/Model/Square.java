@@ -28,11 +28,17 @@ public class Square {
      */
     private List<Food> foods;
 
+    /**
+     * List of all the crackers on the square.
+     */
+    private List<Cracker> crackers;
+
     public Square(int width, int height) {
         this.width = width;
         this.height = height;
         pigeons = new ArrayList<>();
         foods = new ArrayList<>();
+        crackers = new ArrayList<>();
     }
 
     /**
@@ -78,6 +84,10 @@ public class Square {
         for(Pigeon pigeon : pigeons) {
             pigeon.onFoodSpawn(food);
         }
+    }
+
+    public void addCracker(Cracker cracker) {
+        this.crackers.add(cracker);
     }
 
     public int getWidth() {
