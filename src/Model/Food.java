@@ -3,6 +3,9 @@ package Model;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 
 /**
  * @author Matthieu Le Boucher
@@ -27,21 +30,39 @@ public class Food implements Drawable {
 
     private boolean hasBeenEaten = false;
 
+    private Timer timer;
+
+    private int remainingTicks;
+
     /**
      * This square is an observer. Needs to be noticed whenever the food has been eaten.
      */
     private Square square;
 
-    public Food(int x, int y, double timeFresh, Square square) {
+    public Food(int x, int y, int timeFresh, Square square) {
         this.x = x;
         this.y = y;
-        this.timeFresh = timeFresh;
+
         this.square = square;
+
+        this.remainingTicks = timeFresh;
+
+        this.timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                if(remainingTicks == 1) {
+                    timer.cancel();
+                    rotten();
+                }
+
+                remainingTicks--;
+            }
+        }, 0, 1_000);
     }
 
-    public void rotten(double time) {
-        if(isFresh && time < timeFresh)
-            isFresh = false;
+    private void rotten() {
+        isFresh = false;
     }
 
     public boolean isFresh() {
@@ -62,7 +83,7 @@ public class Food implements Drawable {
 
     @Override
     public void draw(GraphicsContext graphicsContext) {
-        graphicsContext.setFill(isFresh ? Color.GREEN : Color.RED);
+        graphicsContext.setStroke(isFresh ? Color.GREEN : Color.RED);
         graphicsContext.strokeOval(x, y, 7, 7);
     }
 }

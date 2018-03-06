@@ -196,7 +196,7 @@ public class SquareController {
     private synchronized void simulate(double delta) {
         for (Food food : square.getFoods()) {
             // Update the fresh state of all existing foods.
-            food.rotten(delta);
+            //food.rotten(delta);
         }
     }
 
@@ -256,8 +256,7 @@ public class SquareController {
                 if(event.getButton() == MouseButton.PRIMARY) {
                     // Instantiate new food at clicked position, with random decay time.
                     square.addFood(new Food(((int) event.getX()), ((int) event.getY()),
-                            random.nextInt(FOOD_MAX_FRESH_TIME) + ((int) System.currentTimeMillis() / 1_000
-                            ), square));
+                            random.nextInt(3) + 1, square));
                 } else {
                     square.addCracker(new Cracker(((int) event.getX()), ((int) event.getY()),
                             random.nextInt(50) + 50, 0, random.nextInt(3) + 1, square));
