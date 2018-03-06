@@ -84,6 +84,6 @@ public class Food implements Drawable {
     @Override
     public void draw(GraphicsContext graphicsContext) {
         graphicsContext.setStroke(isFresh ? Color.GREEN : Color.RED);
-        graphicsContext.strokeOval(x, y, 7, 7);
+        graphicsContext.strokeOval(x, y, 10, 10);
     }
 }
