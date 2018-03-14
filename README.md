@@ -11,3 +11,5 @@ The user can spawn some food at an arbitrary situation by left-clicking onto the
 Any pigeon has a random speed (assigned upon initialization), and is scanning the square at any time for food. Whenever it detects some food, it evaluates its distance to it and runs to it if it's the closest.
 
 Eating food constitutes a concurrential access to food, which is therefore a synchronized process, as well as graphical rendering.
+
+The application is *entirely generic* so that it is really easy and quick to add a species of pigeon with its own behavior.
