@@ -4,7 +4,7 @@ A passionating scene representing graphically the behavior of a multi-threaded a
 
 # How to launch the application
 
-Compile the application and run the application embedded in file ``src/Controller/PigeonsSquare.java``.
+Build the application by compiling Java files in ``src/``, then run the application embedded in file ``src/Controller/PigeonsSquare.java``.
 
 # How to use
 
