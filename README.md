@@ -2,6 +2,12 @@
 
 A passionating scene representing graphically the behavior of a multi-threaded application, including concurrential access.
 
+# How to launch the application
+
+Compile the application and run the application embedded in file ``src/Controller/PigeonsSquare.java``.
+
+# How to use
+
 Separate threads (graphically embodied by *pigeons*) live within a 2D-plane and implement two main behaviors:
 * idle;
 * reaching for food.
